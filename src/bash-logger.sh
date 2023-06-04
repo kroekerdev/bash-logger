@@ -237,7 +237,7 @@ function _log_message() {
 # Return:
 #   - None
 function set_log_level() {
-  function _usage() {
+  function _set_log_level_usage() {
     printf "%s\n" "Usage: ${FUNCNAME[1]} [option] [LEVEL]" >&2
   }
 
@@ -266,7 +266,7 @@ function set_log_level() {
         ;;
       *)
         _invalid_option "$1"
-        _usage
+        _set_log_level_usage
         exit 1
         ;;
     esac
@@ -275,7 +275,7 @@ function set_log_level() {
   
   if [[ -z "$log_level" ]]; then
     _missing_operand
-    _usage
+    _set_log_level_usage
     exit 1
   fi
   
@@ -300,7 +300,7 @@ function set_log_level() {
 # Return:
 #   - None
 function set_log_formatter() {
-  function _usage() {
+  function _set_log_formatter_usage() {
     printf "%s\n" "Usage: ${FUNCNAME[1]} [option] [FORMATTER]" >&2
   }
 
@@ -320,7 +320,7 @@ function set_log_formatter() {
         ;;
       *)
         _invalid_option "$1"
-        _usage
+        _set_log_formatter_usage
         exit 1
         ;;
     esac
@@ -329,7 +329,7 @@ function set_log_formatter() {
 
   if [[ -z "$log_formatter" ]]; then
     _missing_operand
-    _usage
+    _set_log_formatter_usage
     exit 1
   fi
 
@@ -351,7 +351,7 @@ function set_log_formatter() {
 # Return:
 #   - None
 function set_log_file() {
-  function _usage() {
+  function _set_log_file_usage() {
     printf "%s\n" "Usage: ${FUNCNAME[1]} [option] [PATH]" >&2
   }
 
@@ -369,7 +369,7 @@ function set_log_file() {
 
   if [[ -z "$log_file" ]]; then
     _missing_operand
-    _usage
+    _set_log_file_usage
     exit 1
   fi
 
@@ -409,7 +409,7 @@ function set_log_file() {
 # Return:
 #   - None
 function set_suppress_console() {
-  function _usage() {
+  function _set_suppress_console_usage() {
     printf "%s\n" "Usage: ${FUNCNAME[1]} [option] [TRUE|FALSE]" >&2
   }
  
@@ -429,7 +429,7 @@ function set_suppress_console() {
         ;;
       *)
         _invalid_option "$1"
-        _usage
+        _set_suppress_console_usage
         exit 1
         ;;
     esac
@@ -438,7 +438,7 @@ function set_suppress_console() {
 
   if [[ -z "$suppress_console" ]]; then
     _missing_operand
-    _usage
+    _set_suppress_console_usage
     exit 1
   fi
 
@@ -493,7 +493,7 @@ function _set_defaults() {
 # Return:
 #   - None
 function log() {
-  function _usage() {
+  function _log_usage() {
     printf "%s\n" "Usage: ${FUNCNAME[1]} [option] [LEVEL] [MESSAGE]" >&2
   }
   
@@ -570,7 +570,7 @@ function log() {
 
   if [[ -z $log_level || -z $message ]]; then
     _missing_operand
-    _usage
+    _log_usage
     exit 1
   fi
   
@@ -631,7 +631,7 @@ function trap_error() {
 #   - 0 if the return value is zero, otherwise the function or shell is
 #   terminated with an exit status of 1.
 function check_status() {
-  function _usage() {
+  function _check_status_usage() {
     printf "%s\n" "Usage: ${FUNCNAME[1]} [INTEGER]" >&2
   }
   
@@ -639,13 +639,13 @@ function check_status() {
   
   if [[ -z "$return_value" ]]; then
     _missing_operand
-    _usage
+    _check_status_usage
     exit 1
   fi
   
   if ! [[ "$return_value" =~ ^[0-9]+$ ]]; then
     _invalid_option "$1"
-    _usage
+    _check_status_usage
     exit 1
   fi
 
